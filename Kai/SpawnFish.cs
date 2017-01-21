@@ -7,6 +7,9 @@ public class SpawnFish : MonoBehaviour {
 	public Rigidbody2D fishRB;
 	public Rigidbody2D fishObj;
 
+	public Rigidbody2D fishRB2;
+	public Rigidbody2D fishObj2;
+
 	float startTime;
 	bool spawn;
 	int spawnChance;
@@ -29,7 +32,7 @@ public class SpawnFish : MonoBehaviour {
 		//There is a one in SpawnChance* chance of a spawn
 		if(Random.Range(0,spawnChance) == 1 && spawn == true)
 		{
-			switch (Random.Range (0, 3)) 
+			switch (Random.Range (0, 4)) 
 			{
 				case 1:
 				{
@@ -44,6 +47,12 @@ public class SpawnFish : MonoBehaviour {
 					fishObj = Instantiate (fishRB, new Vector3 (30, 0, 0), Quaternion.identity);
 					FishAI fishScript = fishObj.GetComponent<FishAI> ();
 					fishScript.pos = true;
+					break;
+				}
+
+				case 3:
+				{
+					fishObj2 = Instantiate (fishRB2, new Vector3 (Random.Range(-20,20), -30, 0), Quaternion.identity);
 					break;
 				}
 			}

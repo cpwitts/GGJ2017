@@ -5,7 +5,7 @@ using UnityEngine;
 public class FishAI : MonoBehaviour {
 
 	int speed;
-	int jumpHeight;
+	float jumpHeight;
 	int fallSpeed;
 
 	//Left is false, Right is true
@@ -21,7 +21,9 @@ public class FishAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		print (transform.position.x);
+		//print (transform.position.x);
+
+		//Checks if it's spawned from left or right to determine the directon it will go
 		if (pos == true) {
 			transform.Translate (new Vector3 (-speed, 0, 0) * Time.deltaTime);
 			if (transform.position.x < -30) {
@@ -34,6 +36,7 @@ public class FishAI : MonoBehaviour {
 			}
 		}
 
+		//If the fish should jump when reaching a certian point
 		if (transform.position.x > -5 && transform.position.x < 5) {
 			jump = true;
 		}
@@ -43,11 +46,13 @@ public class FishAI : MonoBehaviour {
 		}
 	}
 
+	//Method for the jump animation
 	void jumpAnimation()
 	{
 		transform.Translate (new Vector3 (0, jumpHeight, 0) * Time.deltaTime);
-		jumpHeight -= 1; 
+		jumpHeight -= 20 * Time.deltaTime; 
 
+		//When fish is back into the water, stop falling.
 		if (transform.position.y < -5 && jumpHeight < 1) {
 			jump = false;
 		}
