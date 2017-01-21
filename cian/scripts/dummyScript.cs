@@ -14,4 +14,12 @@ public class dummyScript : MonoBehaviour {
 	void Update () {
         dummy.transform.Translate(new Vector3(-.000003f,0f,0f));
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "attack")
+        {
+            Object.Destroy(this.gameObject);
+        }
+    }
 }
