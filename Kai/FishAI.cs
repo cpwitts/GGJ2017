@@ -7,6 +7,7 @@ public class FishAI : MonoBehaviour {
 	int speed;
 	float jumpHeight;
 	int fallSpeed;
+	bool dead;//Is this fish dead or alive?
 
 	//Left is false, Right is true
 	public bool pos;
@@ -17,6 +18,7 @@ public class FishAI : MonoBehaviour {
 		jump = false;
 		speed = Random.Range(5, 14);
 		jumpHeight = Random.Range(15, 18);
+		dead = false;
 	}
 	
 	// Update is called once per frame
@@ -53,8 +55,16 @@ public class FishAI : MonoBehaviour {
 		jumpHeight -= 20 * Time.deltaTime; 
 
 		//When fish is back into the water, stop falling.
-		if (transform.position.y < -5 && jumpHeight < 1) {
+		if (transform.position.y < -5 && jumpHeight < 1 && !dead) {
 			jump = false;
 		}
+	}
+
+	//Kills the fish
+	public void kill()
+	{
+		gameObject.tag = "Untagged";
+		GetComponent<SpriteRenderer>().flipY = true;
+		dead = true;
 	}
 }

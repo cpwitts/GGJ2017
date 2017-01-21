@@ -20,6 +20,7 @@ public class hurtboxScript : MonoBehaviour {
         {
             cameraParentScript camReact = dummyCamera.GetComponent<cameraParentScript>();
             camReact.shake = true;
+			collision.gameObject.GetComponent<FishAI> ().kill ();
         }
     }
 }

@@ -1,0 +1,225 @@
+fileFormatVersion: 2
+guid: 163023eab13c6574a9a2779d1611ad56
+timeCreated: 1485012070
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: hat
+    21300002: Head
+    21300004: paddle head
+    21300006: Upper arm
+    21300008: body
+    21300010: Upper leg
+    21300012: handle
+    21300014: lower arm
+    21300016: lower leg
+    21300018: hand
+    21300020: stick_10
+    21300022: hat
+    21300024: pad
+    21300026: UpperArm
+    21300028: Body
+    21300030: UpperLeg
+    21300032: paddle
+    21300034: LowerArm
+    21300036: Lowerleg
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: hat
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 764
+        width: 397
+        height: 136
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Head
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 769
+        width: 126
+        height: 125
+      alignment: 9
+      pivot: {x: 0.50381714, y: 0.20244971}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: pad
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 557
+        width: 95
+        height: 168
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: UpperArm
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 509
+        width: 99
+        height: 197
+      alignment: 9
+      pivot: {x: 0.84244454, y: 0.9037528}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Body
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 368
+        width: 76
+        height: 332
+      alignment: 9
+      pivot: {x: 0.3455875, y: 0.5274923}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: UpperLeg
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 474
+        width: 86
+        height: 241
+      alignment: 9
+      pivot: {x: 0.19676173, y: 0.92201656}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: paddle
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 158
+        width: 45
+        height: 370
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: LowerArm
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 316
+        width: 50
+        height: 155
+      alignment: 9
+      pivot: {x: 0.3956848, y: 0.8701459}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Lowerleg
+      rect:
+        serializedVersion: 2
+        x: 738
+        y: 174
+        width: 66
+        height: 261
+      alignment: 9
+      pivot: {x: 0.77658916, y: 0.91465765}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: hand
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 266
+        width: 67
+        height: 46
+      alignment: 9
+      pivot: {x: 0.20807704, y: 0.67007715}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
