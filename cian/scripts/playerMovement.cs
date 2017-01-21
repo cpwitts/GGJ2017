@@ -35,6 +35,8 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        hurtBox.transform.position = new Vector3(player.transform.position.x + ( 0.8f * direction), player.transform.position.y, player.transform.position.z);
+        hurtBox.SetActive(false);
         Debug.Log("damaged: " + damaged.ToString());
         if (damaged)
         {
@@ -117,10 +119,18 @@ public class playerMovement : MonoBehaviour
             if (attackTick < attackTimer)
             {
                 attackTick += 1;
-                if (attackTick == 3)
+                if (attackTick >= 3)
                 {
-                    var hurtBoxFab = (GameObject)Instantiate(hurtBox, player.transform.position + new Vector3(0.8f * direction, 0.0f, 0.0f), player.transform.rotation);
+                    hurtBox.SetActive(true);
+                    
                     Debug.Log("attacking");
+                }
+                if(attackTick >= 10)
+                {
+                    if (hurtBox.activeSelf)
+                    {
+                        hurtBox.SetActive(false);
+                    }
                 }
                 Debug.Log(attacking.ToString());
             }
