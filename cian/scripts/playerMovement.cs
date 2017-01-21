@@ -8,6 +8,7 @@ public class playerMovement : MonoBehaviour
     public GameObject player;
     public GameObject hurtBox;
     public GameObject hurtFlash;
+    public GameObject mask;
     public float direction = 1;
     public float healthMax = 3;
     public float health = 3;
@@ -35,6 +36,8 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         hurtBox.transform.position = new Vector3(player.transform.position.x + ( 0.8f * direction), player.transform.position.y, player.transform.position.z);
         hurtBox.SetActive(false);
         Debug.Log("damaged: " + damaged.ToString());
@@ -69,48 +72,115 @@ public class playerMovement : MonoBehaviour
         //player inputs
         if (Input.GetKey("a") && attacking == false && justHit == false)
         {
+            
             if(ducking == false && justHit == false)
             {
-                player.transform.Translate(new Vector3(-movementSpeed, 0.0f, 0.0f));
-                direction = -1;
+                if (grounded)
+                {
+                    mask.GetComponent<Animator>().Play("walkLeft");
+                    player.transform.Translate(new Vector3(-movementSpeed, 0.0f, 0.0f));
+                    direction = -1;
+                }
+                if (!grounded)
+                {
+                    mask.GetComponent<Animator>().Play("JumpLeft");
+                    player.transform.Translate(new Vector3(-movementSpeed, 0.0f, 0.0f));
+                    direction = -1;
+                }
+                
+                
             }
             else if(ducking && justHit == false)
             {
                 direction = -1;
             }
         }
+        if (Input.GetKeyUp("a"))
+        {
+            mask.GetComponent<Animator>().Play("IdleLeft");
+        }
         if (Input.GetKey("d") && attacking == false && justHit == false)
         {
             if (ducking == false && justHit == false)
             {
-                player.transform.Translate(new Vector3(movementSpeed, 0.0f, 0.0f));
-                direction = 1;
+                if (grounded)
+                {
+                    mask.GetComponent<Animator>().Play("walk");
+                    
+                    player.transform.Translate(new Vector3(movementSpeed, 0.0f, 0.0f));
+                    direction = 1;
+                }
+                if (!grounded)
+                {
+                    mask.GetComponent<Animator>().Play("Jump");
+                    player.transform.Translate(new Vector3(movementSpeed, 0.0f, 0.0f));
+                    direction = 1;
+
+                }
             } else if (ducking && justHit == false)
             {
                 direction = 1;
             }
         }
+        if (Input.GetKeyUp("d"))
+        {
+            mask.GetComponent<Animator>().Play("Idle");
+        }
         if (Input.GetKeyDown("k") && grounded == true && justHit == false)
         {
-            rb.AddForce(player.transform.up * jumpSpeed, ForceMode2D.Impulse);         
+            if(direction == -1)
+            {
+                mask.GetComponent<Animator>().Play("JumpLeft");
+                rb.AddForce(player.transform.up * jumpSpeed, ForceMode2D.Impulse);
+            }
+            if (direction == 1)
+            {
+                mask.GetComponent<Animator>().Play("Jump");
+                rb.AddForce(player.transform.up * jumpSpeed, ForceMode2D.Impulse);
+            }
+
+
         }
 
         if(Input.GetKeyDown("s") && grounded && justHit == false)
         {
-            ducking = true;
+            if(direction == -1)
+            {
+                mask.GetComponent<Animator>().Play("crouchleft");
+                ducking = true;
+            }
+            if(direction == 1)
+            {
+                mask.GetComponent<Animator>().Play("crouch");
+                ducking = true;
+            }
+            
         }else if (Input.GetKeyUp("s"))
         {
-            ducking = false;
+            if(direction == -1)
+            {
+                mask.GetComponent<Animator>().Play("IdleLeft");
+                ducking = false;
+            }
+            if(direction == 1)
+            {
+                mask.GetComponent<Animator>().Play("Idle");
+                ducking = false;
+            }
+           
         }
 
         if (ducking)
         {
             bc2.offset = new Vector2(0f, -0.25f);
             bc2.size = new Vector2(1f, 0.5f);
-        }else
+            
+        }
+        else
         {
             bc2.offset = new Vector2(0f, 0f);
             bc2.size = new Vector2(1f, 1f);
+            
         }
 
         //player Attacks
@@ -144,7 +214,34 @@ public class playerMovement : MonoBehaviour
 
         if (Input.GetKeyDown("j") && attacking == false && justHit == false)
         {
-            attacking = true;
+           if(direction == 1)
+            {
+                if (ducking)
+                {
+                    mask.GetComponent<Animator>().Play("New Animation");
+                    attacking = true;
+                }
+                else
+                {
+                    mask.GetComponent<Animator>().Play("kick");
+                    attacking = true;
+                }
+            }
+           if(direction == -1)
+            {
+                if (ducking)
+                {
+                    mask.GetComponent<Animator>().Play("crouchAttackLeft");
+                    attacking = true;
+                }
+                else
+                {
+                    mask.GetComponent<Animator>().Play("kickLeft");
+                    attacking = true;
+                }
+            }
+            
+            
             
         }
 
