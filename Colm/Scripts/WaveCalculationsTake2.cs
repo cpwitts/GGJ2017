@@ -1,4 +1,28 @@
-﻿using System.Collections;
+﻿/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * DO NOT USE, BETTER CODE HAS BEEN WRITTEN
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
