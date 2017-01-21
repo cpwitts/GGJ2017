@@ -10,11 +10,12 @@ public class WaveCalculationsTake2 : MonoBehaviour
 	public float prevX;
 	public float prevY;
 	public float slope;
+	public float offset;
 
 	void Start()
 	{
 		prevX = x;
-		prevY = transform.position.y;
+		prevY = transform.position.y + offset;
 	}
 	// Update is called once per frame
 	void Update () 
@@ -22,6 +23,7 @@ public class WaveCalculationsTake2 : MonoBehaviour
 		if (x >= 2 * Mathf.PI) 
 		{
 			x = 0;
+			prevX = 0;
 		}
 
 		if (x == 0) 
@@ -32,13 +34,17 @@ public class WaveCalculationsTake2 : MonoBehaviour
 		calcRotation ();
 	}
 
-	void moveToNextHeight()
+	void FixedUpdate()
 	{
 		prevX = x;
-		prevY = transform.position.y;
+		prevY = transform.position.y + offset;
+		print (transform.position.y + " - " + prevY);
+	}
+
+	void moveToNextHeight()
+	{
 		x += speed * Time.deltaTime;
 		transform.position = new Vector3(transform.position.x,  (roughness * Mathf.Sin(x)) - 1f, 0);
-
 	}
 
 	void calcNewRoughness()
@@ -48,17 +54,9 @@ public class WaveCalculationsTake2 : MonoBehaviour
 
 	void calcRotation()
 	{
-		slope = (transform.position.y - prevY) / (x - prevX);
+		slope = (transform.position.y + offset - prevY) / (x - prevX);
 
-		if (slope > 0) 
-		{
-			transform.rotation = new Quaternion (0, 0, Mathf.Atan (slope), 1);
-		} 
-
-		else 
-		{
-			transform.rotation = new Quaternion (0, 0, -Mathf.Atan (slope), 1);
-		}
+		GetComponent<Rigidbody2D>().MoveRotation (Mathf.Atan (slope) * -Mathf.Rad2Deg);
 	}
 }
 
