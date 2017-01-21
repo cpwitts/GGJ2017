@@ -21,5 +21,9 @@ public class FishAI2 : MonoBehaviour {
 			jumpSpeed -= 20 * Time.deltaTime;
 			print (1 * Time.deltaTime);
 		}
+
+		if (transform.position.y < -20 && jumpSpeed < 1) {
+			Destroy (this.gameObject);
+		}
 	}
 }

@@ -39,6 +39,7 @@ public class SpawnFish : MonoBehaviour {
 					fishObj = Instantiate (fishRB, new Vector3 (-30, 0, 0), Quaternion.identity);
 					FishAI fishScript = fishObj.GetComponent<FishAI> ();
 					fishScript.pos = false;
+					fishObj.GetComponent<SpriteRenderer> ().flipX = true;
 					break;
 				}
 
