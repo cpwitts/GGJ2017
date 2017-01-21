@@ -74,7 +74,7 @@ public class GroupWaveCalculator : MonoBehaviour
 		x += speed * Time.deltaTime;
 		for (int i = 0; i < waves.Length; i++) 
 		{
-			waves[i].position = new Vector3(waves[i].position.x,  (roughness * Mathf.Sin(x + xOffset * (i - midpoint))), 0);
+			waves[i].position = new Vector3(waves[i].position.x,  (roughness * Mathf.Sin(x + xOffset * (i - midpoint))) + yOffset, 0);
 		}
 	}
 		

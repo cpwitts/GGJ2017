@@ -5,10 +5,13 @@ using UnityEngine;
 public class FishAI2 : MonoBehaviour {
 
 	float jumpSpeed;
+	bool dead;
+
 
 	// Use this for initialization
 	void Start () {
 		jumpSpeed = Random.Range (15, 20);
+		dead = false;
 	}
 	
 	// Update is called once per frame
@@ -25,5 +28,12 @@ public class FishAI2 : MonoBehaviour {
 		if (transform.position.y < -20 && jumpSpeed < 1) {
 			Destroy (this.gameObject);
 		}
+	}
+
+	public void kill()
+	{
+		gameObject.tag = "Untagged";
+		GetComponent<SpriteRenderer>().flipY = true;
+		dead = true;
 	}
 }

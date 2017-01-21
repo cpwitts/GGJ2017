@@ -20,7 +20,14 @@ public class hurtboxScript : MonoBehaviour {
         {
             cameraParentScript camReact = dummyCamera.GetComponent<cameraParentScript>();
             camReact.shake = true;
-			collision.gameObject.GetComponent<FishAI> ().kill ();
+			if (collision.gameObject.GetComponent<FishAI> () != null) 
+			{
+				collision.gameObject.GetComponent<FishAI> ().kill ();
+			}
+			else if (collision.gameObject.GetComponent<FishAI2> () != null) 
+			{
+				collision.gameObject.GetComponent<FishAI2> ().kill ();
+			}
         }
     }
 }
