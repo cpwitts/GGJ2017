@@ -1,4 +1,34 @@
-﻿using System.Collections;
+﻿/**
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ *  DO NOT USE, CODE DOESN'T DO ANYTHING IMPORTANT
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

@@ -6,6 +6,11 @@ public class hurtboxScript : MonoBehaviour {
 
     public GameObject dummyCamera;
     // Use this for initialization
+
+	//GUIscript used to keep score
+	public GUIscript score;
+
+
     void Start () {
 		
 	}
@@ -30,6 +35,8 @@ public class hurtboxScript : MonoBehaviour {
 				collision.gameObject.GetComponent<FishAI2> ().kill ();
 				collision.gameObject.GetComponent<FishAI2> ().GetComponent<AudioSource> ().Play();
 			}
+
+			score.addScore (10);
         }
     }
 }

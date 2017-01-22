@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerMovement : MonoBehaviour
 {
@@ -26,6 +27,12 @@ public class playerMovement : MonoBehaviour
     float attackTick = 0f;
     public Rigidbody2D rb;
     public BoxCollider2D bc2;
+
+	//True if the game ends, false if the game should keep playing
+	public bool gameOver;
+	//Assign the GUI script here
+	public GUIscript gui;
+
 
 	public AudioSource[] audio;
     // Use this for initialization
@@ -73,186 +80,159 @@ public class playerMovement : MonoBehaviour
 			audio[0].Play ();
         }
 
-        //player inputs
-        if (Input.GetKey("a") && attacking == false && justHit == false)
-        {
+		//Player inputs should only be calculated when the game is still playing
+		if (!gameOver) {
+			//player inputs
+			if (Input.GetKey ("a") && attacking == false && justHit == false) {
+	            
+				if (ducking == false && justHit == false) {
+					if (grounded) {
+						mask.GetComponent<Animator> ().Play ("walkLeft");
+						player.transform.Translate (new Vector3 (-movementSpeed, 0.0f, 0.0f));
+						direction = -1;
+					}
+					if (!grounded) {
+						mask.GetComponent<Animator> ().Play ("JumpLeft");
+						player.transform.Translate (new Vector3 (-movementSpeed, 0.0f, 0.0f));
+						direction = -1;
+					}
+	                
+	                
+				} else if (ducking && justHit == false) {
+					direction = -1;
+				}
+			}
+			if (Input.GetKeyUp ("a")) {
+				mask.GetComponent<Animator> ().Play ("IdleLeft");
+			}
+			if (Input.GetKey ("d") && attacking == false && justHit == false) {
+				if (ducking == false && justHit == false) {
+					if (grounded) {
+						mask.GetComponent<Animator> ().Play ("walk");
+	                    
+						player.transform.Translate (new Vector3 (movementSpeed, 0.0f, 0.0f));
+						direction = 1;
+					}
+					if (!grounded) {
+						mask.GetComponent<Animator> ().Play ("Jump");
+						player.transform.Translate (new Vector3 (movementSpeed, 0.0f, 0.0f));
+						direction = 1;
+
+					}
+				} else if (ducking && justHit == false) {
+					direction = 1;
+				}
+			}
+			if (Input.GetKeyUp ("d")) {
+				mask.GetComponent<Animator> ().Play ("Idle");
+			}
+			if (Input.GetKeyDown ("k") && grounded == true && justHit == false) {
+				if (direction == -1) {
+					mask.GetComponent<Animator> ().Play ("JumpLeft");
+					rb.AddForce (player.transform.up * jumpSpeed, ForceMode2D.Impulse);
+				}
+				if (direction == 1) {
+					mask.GetComponent<Animator> ().Play ("Jump");
+					rb.AddForce (player.transform.up * jumpSpeed, ForceMode2D.Impulse);
+				}
+
+
+			}
+
+			if (Input.GetKeyDown ("s") && grounded && justHit == false) {
+				if (direction == -1) {
+					mask.GetComponent<Animator> ().Play ("crouchleft");
+					ducking = true;
+				}
+				if (direction == 1) {
+					mask.GetComponent<Animator> ().Play ("crouch");
+					ducking = true;
+				}
+	            
+			} else if (Input.GetKeyUp ("s")) {
+				if (direction == -1) {
+					mask.GetComponent<Animator> ().Play ("IdleLeft");
+					ducking = false;
+				}
+				if (direction == 1) {
+					mask.GetComponent<Animator> ().Play ("Idle");
+					ducking = false;
+				}
+	           
+			}
+
+			if (ducking) {
+				bc2.offset = new Vector2 (0f, -0.25f);
+				bc2.size = new Vector2 (1f, 0.5f);
+	            
+			} else {
+				bc2.offset = new Vector2 (0f, 0f);
+				bc2.size = new Vector2 (1f, 1f);
+	            
+			}
+
+			//player Attacks
+			if (attacking) {
+				if (attackTick < attackTimer) {
+					attackTick += 1;
+					if (attackTick >= 3) {
+						hurtBox.SetActive (true);
+	                    
+						Debug.Log ("attacking");
+					}
+					if (attackTick >= 10) {
+						if (hurtBox.activeSelf) {
+							hurtBox.SetActive (false);
+						}
+					}
+					Debug.Log (attacking.ToString ());
+				}
+				if (attackTick >= attackTimer) {
+					attacking = false;
+					attackTick = 0f;
+					Debug.Log (attacking.ToString ());
+				}
+			}
+
+			if (Input.GetKeyDown ("j") && attacking == false && justHit == false) {
+				if (direction == 1) {
+					if (ducking) {
+						mask.GetComponent<Animator> ().Play ("New Animation");
+						attacking = true;
+					} else {
+						mask.GetComponent<Animator> ().Play ("kick");
+						attacking = true;
+					}
+				}
+				if (direction == -1) {
+					if (ducking) {
+						mask.GetComponent<Animator> ().Play ("crouchAttackLeft");
+						attacking = true;
+					} else {
+						mask.GetComponent<Animator> ().Play ("kickLeft");
+						attacking = true;
+					}
+				}
             
-            if(ducking == false && justHit == false)
-            {
-                if (grounded)
-                {
-                    mask.GetComponent<Animator>().Play("walkLeft");
-                    player.transform.Translate(new Vector3(-movementSpeed, 0.0f, 0.0f));
-                    direction = -1;
-                }
-                if (!grounded)
-                {
-                    mask.GetComponent<Animator>().Play("JumpLeft");
-                    player.transform.Translate(new Vector3(-movementSpeed, 0.0f, 0.0f));
-                    direction = -1;
-                }
-                
-                
-            }
-            else if(ducking && justHit == false)
-            {
-                direction = -1;
-            }
-        }
-        if (Input.GetKeyUp("a"))
-        {
-            mask.GetComponent<Animator>().Play("IdleLeft");
-        }
-        if (Input.GetKey("d") && attacking == false && justHit == false)
-        {
-            if (ducking == false && justHit == false)
-            {
-                if (grounded)
-                {
-                    mask.GetComponent<Animator>().Play("walk");
-                    
-                    player.transform.Translate(new Vector3(movementSpeed, 0.0f, 0.0f));
-                    direction = 1;
-                }
-                if (!grounded)
-                {
-                    mask.GetComponent<Animator>().Play("Jump");
-                    player.transform.Translate(new Vector3(movementSpeed, 0.0f, 0.0f));
-                    direction = 1;
+			}
+				
 
-                }
-            } else if (ducking && justHit == false)
-            {
-                direction = 1;
-            }
-        }
-        if (Input.GetKeyUp("d"))
-        {
-            mask.GetComponent<Animator>().Play("Idle");
-        }
-        if (Input.GetKeyDown("k") && grounded == true && justHit == false)
-        {
-            if(direction == -1)
-            {
-                mask.GetComponent<Animator>().Play("JumpLeft");
-                rb.AddForce(player.transform.up * jumpSpeed, ForceMode2D.Impulse);
-            }
-            if (direction == 1)
-            {
-                mask.GetComponent<Animator>().Play("Jump");
-                rb.AddForce(player.transform.up * jumpSpeed, ForceMode2D.Impulse);
-            }
+			if (health <= 0f || transform.position.y < -12) {
+				transform.position = new Vector3 (0, -24, 0);
+				gui.endGame ();
+				gameOver = true;
+			}
+		} 
 
-
-        }
-
-        if(Input.GetKeyDown("s") && grounded && justHit == false)
-        {
-            if(direction == -1)
-            {
-                mask.GetComponent<Animator>().Play("crouchleft");
-                ducking = true;
-            }
-            if(direction == 1)
-            {
-                mask.GetComponent<Animator>().Play("crouch");
-                ducking = true;
-            }
-            
-        }else if (Input.GetKeyUp("s"))
-        {
-            if(direction == -1)
-            {
-                mask.GetComponent<Animator>().Play("IdleLeft");
-                ducking = false;
-            }
-            if(direction == 1)
-            {
-                mask.GetComponent<Animator>().Play("Idle");
-                ducking = false;
-            }
-           
-        }
-
-        if (ducking)
-        {
-            bc2.offset = new Vector2(0f, -0.25f);
-            bc2.size = new Vector2(1f, 0.5f);
-            
-        }
-        else
-        {
-            bc2.offset = new Vector2(0f, 0f);
-            bc2.size = new Vector2(1f, 1f);
-            
-        }
-
-        //player Attacks
-        if (attacking )
-        {
-            if (attackTick < attackTimer)
-            {
-                attackTick += 1;
-                if (attackTick >= 3)
-                {
-                    hurtBox.SetActive(true);
-                    
-                    Debug.Log("attacking");
-                }
-                if(attackTick >= 10)
-                {
-                    if (hurtBox.activeSelf)
-                    {
-                        hurtBox.SetActive(false);
-                    }
-                }
-                Debug.Log(attacking.ToString());
-            }
-            if (attackTick >= attackTimer)
-            {
-                attacking = false;
-                attackTick = 0f;
-                Debug.Log(attacking.ToString());
-            }
-        }
-
-        if (Input.GetKeyDown("j") && attacking == false && justHit == false)
-        {
-           if(direction == 1)
-            {
-                if (ducking)
-                {
-                    mask.GetComponent<Animator>().Play("New Animation");
-                    attacking = true;
-                }
-                else
-                {
-                    mask.GetComponent<Animator>().Play("kick");
-                    attacking = true;
-                }
-            }
-           if(direction == -1)
-            {
-                if (ducking)
-                {
-                    mask.GetComponent<Animator>().Play("crouchAttackLeft");
-                    attacking = true;
-                }
-                else
-                {
-                    mask.GetComponent<Animator>().Play("kickLeft");
-                    attacking = true;
-                }
-            }
-            
-            
-            
-        }
-
-       if(health <= 0f)
-        {
-            Object.Destroy(this.gameObject);
-        }
+		//If the game is over, check for restart
+		else 
+		{
+			if(Input.GetKeyDown( KeyCode.Return ))
+			{
+				Time.timeScale = 1;
+				SceneManager.LoadScene(0);
+			}
+		}
     }
 
     //ground Collisions
