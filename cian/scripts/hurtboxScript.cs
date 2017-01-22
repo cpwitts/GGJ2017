@@ -23,10 +23,12 @@ public class hurtboxScript : MonoBehaviour {
 			if (collision.gameObject.GetComponent<FishAI> () != null) 
 			{
 				collision.gameObject.GetComponent<FishAI> ().kill ();
+				collision.gameObject.GetComponent<FishAI> ().GetComponent<AudioSource> ().Play ();
 			}
 			else if (collision.gameObject.GetComponent<FishAI2> () != null) 
 			{
 				collision.gameObject.GetComponent<FishAI2> ().kill ();
+				collision.gameObject.GetComponent<FishAI2> ().GetComponent<AudioSource> ().Play();
 			}
         }
     }

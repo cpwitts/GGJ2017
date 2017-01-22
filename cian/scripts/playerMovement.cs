@@ -26,11 +26,14 @@ public class playerMovement : MonoBehaviour
     float attackTick = 0f;
     public Rigidbody2D rb;
     public BoxCollider2D bc2;
+
+	public AudioSource[] audio;
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         bc2 = GetComponent<BoxCollider2D>();
+
     }
 
     // Update is called once per frame
@@ -67,6 +70,7 @@ public class playerMovement : MonoBehaviour
         {
             //player.transform.Translate(new Vector3(hurtSpeed * (direction * -1), 0.0f, 0.0f));
             rb.AddForce(player.transform.right * (hurtSpeed * (direction * -1)), ForceMode2D.Impulse);
+			audio[0].Play ();
         }
 
         //player inputs
