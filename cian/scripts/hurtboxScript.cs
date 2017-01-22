@@ -5,10 +5,14 @@ using UnityEngine;
 public class hurtboxScript : MonoBehaviour {
 
     public GameObject dummyCamera;
+    public GameObject Parent;
+    public GameObject hurt;
+    public Sprite left;
+    public Sprite right;
     // Use this for initialization
 
-	//GUIscript used to keep score
-	public GUIscript score;
+    //GUIscript used to keep score
+    public GUIscript score;
 
 
     void Start () {
@@ -21,6 +25,15 @@ public class hurtboxScript : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        playerMovement playerMove = Parent.GetComponent<playerMovement>();
+        if(playerMove.direction == -1)
+        {
+            hurt.GetComponent<SpriteRenderer>().sprite = left;
+        }
+        if(playerMove.direction == 1)
+        {
+            hurt.GetComponent<SpriteRenderer>().sprite = right;
+        }
         if (collision.gameObject.tag == "enemy")
         {
             cameraParentScript camReact = dummyCamera.GetComponent<cameraParentScript>();

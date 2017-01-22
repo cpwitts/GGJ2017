@@ -6,9 +6,12 @@ public class GUIscript : MonoBehaviour {
 
 	//Style of the score text
 	public GUIStyle scoreStyle;
+    public GUIStyle healthStyle;
+    public GameObject player;
 	//Player score
 	float score;
-	//Score rouned to an int for clean display
+    //Score rouned to an int for clean display
+    int gameHealth;
 	int displayedScore;
 	//Is the game over?
 	public bool gameOver;
@@ -23,6 +26,9 @@ public class GUIscript : MonoBehaviour {
 
 	void Update () 
 	{
+        //health
+        playerMovement playMove = player.GetComponent<playerMovement>();
+        gameHealth = (int)playMove.health;
 		//Player gets points for not dying
 		score += Time.deltaTime;
 		displayedScore = (int)score;
@@ -38,9 +44,9 @@ public class GUIscript : MonoBehaviour {
 	{
 		//Displays score
 		GUI.Label( new Rect(Screen.width / 1.8f, Screen.height / 1.1f, 200, 200), "Score: " + displayedScore, scoreStyle);
-
-		//DIsplays gameOver message when the game ends
-		if (gameOver) 
+        GUI.Label(new Rect(Screen.width / 1.2f, Screen.height / 1.1f, 200, 200), "health: " + gameHealth, healthStyle);
+        //DIsplays gameOver message when the game ends
+        if (gameOver) 
 		{
 			GUI.Label( new Rect(Screen.width / 5, Screen.height / 10, 400, 400), "GAME OVER\nYOUR SCORE: " + displayedScore + "\nPRESS ENTER TO RESTART", endStyle); 
 		}
