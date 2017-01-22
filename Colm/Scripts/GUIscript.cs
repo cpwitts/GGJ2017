@@ -50,8 +50,11 @@ public class GUIscript : MonoBehaviour {
 	public void endGame ()
 	{
 		gameOver = true;
+		GameObject.Find ("bgm").GetComponent<AudioSource> ().Stop ();
+		GetComponent<AudioSource> ().Play ();
 	}
 
+	//Adds a given value to the score
 	public void addScore (float scoreToAdd)
 	{
 		score += scoreToAdd;

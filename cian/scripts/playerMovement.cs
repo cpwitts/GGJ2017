@@ -229,7 +229,6 @@ public class playerMovement : MonoBehaviour
 		{
 			if(Input.GetKeyDown( KeyCode.Return ))
 			{
-				Time.timeScale = 1;
 				SceneManager.LoadScene(0);
 			}
 		}
