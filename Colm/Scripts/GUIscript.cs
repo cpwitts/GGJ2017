@@ -48,7 +48,7 @@ public class GUIscript : MonoBehaviour {
         //DIsplays gameOver message when the game ends
         if (gameOver) 
 		{
-			GUI.Label( new Rect(Screen.width / 5, Screen.height / 10, 400, 400), "GAME OVER\nYOUR SCORE: " + displayedScore + "\nPRESS ENTER TO RESTART", endStyle); 
+			GUI.Label( new Rect(0, 0, Screen.width, Screen.height- Screen.height/3), "GAME OVER\nYOUR SCORE: " + displayedScore + "\nPRESS ENTER TO RESTART", endStyle); 
 		}
 	}
 
